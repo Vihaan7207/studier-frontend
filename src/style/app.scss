@@ -1,0 +1,18 @@
+@import 'variables';
+
+.button {
+    color: black;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 7px;
+    border-width: 2.5px;
+}
+
+.button:hover {
+    color: white;
+    background-color: $blue-color;
+    border-color: white;
+}
