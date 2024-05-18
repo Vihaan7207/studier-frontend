@@ -9,15 +9,24 @@ export default function Signin() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // const [usernameWrong, setUsernameWrong] = useState(false);
+  // const [passwordWrong, setPasswordWrong] = useState(false);
+  // const [usernameError, setUsernameError] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
 
   const login = () => {
     axios.get('http://localhost:5001/users')
     .then(res => {
-        const logInUser = res.data.filter((user) => user.username === username)[0];
-        if (logInUser.password === password) {
-          alert('test')
-          navigate('/home');
+        if (username !== "" && password !== "") {
+          const logInUser = res.data.filter((user) => user.username === username)[0];
+          if (logInUser.password === password) {
+            navigate('/home');
+          }
         }
+        else {
+          alert('username and password must not be empty')
+        }
+        
     })
     .catch(error => {
       throw error

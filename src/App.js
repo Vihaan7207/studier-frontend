@@ -4,6 +4,7 @@ import { appTheme } from './themes/appTheme';
 import CssBaseline from '@mui/material/CssBaseline';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/signin' element={<Signin />}/>
           <Route path='/signup' element={<Signup />}/>
+          <Route path='/home' element={<Home />}/>
         </Routes>
       </ThemeProvider>
     </div>
