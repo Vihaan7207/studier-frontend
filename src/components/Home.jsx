@@ -1,11 +1,19 @@
 import React from 'react';
 import { Paper, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function Home({ user, loggedIn = false }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const loggedInUser = JSON.parse(user);
-  const sets = ['Math', 'Science', 'ELA'];
+  // console.log(loggedInUser.id);
+  const [sets, setSets] = useState([]);
+   axios.get('http://localhost:5001/sets', { params: { userId: loggedInUser.id } }).then(res => {
+    // console.log(res.data);
+    setSets(res.data);
+    // console.log(sets);   
+  });
 
   // function returnNotSignedIn() {
   //   navigate('/signin');
@@ -33,12 +41,16 @@ export default function Home({ user, loggedIn = false }) {
         <Paper elevation={18} style={{ width: '80vw', height: '400px', marginTop: '50px', marginLeft: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
           <Typography variant={'h3'} style={{ marginTop: '50px' }}>Your Sets</Typography>
           <br></br>
-          <Stack direction="row" spacing={3} style={{ marginTop: '50px' }} >
+          {sets.length > 0 ? (
+            
+            <Stack direction="row" spacing={3} style={{ marginTop: '50px' }} >
             { sets.map((set, i) => {
-              // console.log(set);
-              return <Paper key={i} elevation={2} style={{ padding: '20px', fontSize: '20px', cursor: 'pointer' }} >{set}</Paper>
+              return <Paper key={i} elevation={2} style={{ padding: '20px', fontSize: '20px', cursor: 'pointer' }} >{set.name}</Paper>
             })}
           </Stack>
+          ) : (
+            <Typography variant="body1">Loading sets...</Typography>
+          )  }
         </Paper>
     </div>
   )

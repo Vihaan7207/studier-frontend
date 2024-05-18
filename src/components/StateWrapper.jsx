@@ -19,8 +19,8 @@ export default function StateWrapper() {
         axios.get('http://localhost:5001/users')
         .then(res => {
             const logInUser = res.data.filter((user) => user.username === username)[0];
-            console.log(logInUser);
-            console.log(JSON.stringify(logInUser))
+            // console.log(logInUser);
+            // console.log(JSON.stringify(logInUser))
             setLoggedInUser(JSON.stringify(logInUser));
             localStorage.setItem('studier:loggedIn', true);
             localStorage.setItem('studier:user', loggedInUser);
